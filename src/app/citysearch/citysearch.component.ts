@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-citysearch',
@@ -8,10 +9,15 @@ import { FormControl } from '@angular/forms';
 })
 export class CitysearchComponent implements OnInit {
 
-  search = new FormControl()
+  search = new FormControl('', [Validators.minLength(3)])
   constructor() { }
 
   ngOnInit(): void {
+    this.search.valueChanges
+    .pipe(debounceTime(1000))
+    .subscribe((SearchValue: string) => {
+
+    })
   }
 
 }
