@@ -15,11 +15,13 @@ export class WeatherService {
   getCurrentWeather(search: string|number, country?: string) {
     let uriParams = '';
     if (typeof search === 'string'){
-      uriParams = `q={search}`
+      uriParams = `q=${search}`
     } else {
-      uriParams = `zip=${country}`
+      uriParams = `zip=${search}`
     }
-
+      if (country) {
+          uriParams = `${uriParams},${country}`
+      }
 
       return this.httpClient.get<ICurrentWeatherData>
       (`https://api.openweathermap.org/data/2.5/weather?${uriParams}&appid=${environment.appId}`)
