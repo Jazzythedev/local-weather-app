@@ -12,9 +12,17 @@ export class WeatherService {
   constructor(private httpClient: HttpClient) { }
 
 
-  getCurrentWeather(city: string, country: string) {
+  getCurrentWeather(search: string|number, country?: string) {
+    let uriParams = '';
+    if (typeof search === 'string'){
+      uriParams = `q={search}`
+    } else {
+      uriParams = `zip=${country}`
+    }
+
+
       return this.httpClient.get<ICurrentWeatherData>
-      (`https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${environment.appId}`)
+      (`https://api.openweathermap.org/data/2.5/weather?${uriParams}&appid=${environment.appId}`)
       .pipe(map(data => this.transformToIcurrentWeather(data)))
           
       
@@ -22,7 +30,9 @@ export class WeatherService {
   }
 
 private transformToIcurrentWeather(data:ICurrentWeatherData) {
-    return {
+    
+  
+  return {
       city: data.name,
       country: data.sys.country,
       date: new Date(data.dt * 1000),
