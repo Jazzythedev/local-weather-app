@@ -9,15 +9,14 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
-import { CitysearchComponent } from './citysearch/citysearch.component';
-
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CurrentWeatherComponent,
-    CitysearchComponent
+    CurrentWeatherComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +27,9 @@ import { CitysearchComponent } from './citysearch/citysearch.component';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule
    
   ],
   
